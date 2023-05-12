@@ -41,6 +41,19 @@ services:
       - ./es_indices/:/usr/share/logstash/es_indices/
     networks:
       - elastic
+  
+  elasticdump:
+    image: elasticdump/elasticsearch-dump 
+    container_name: elasticdump
+    ports:
+      - "5602:5602"
+    volumes: 
+      - ./elastic_dump_data/index.json:/usr/src/app/index.json
+    networks:
+      - elastic
+    depends_on:
+      - elasticsearch
+    command: ["bash", "-c", "elasticdump --input=/usr/src/app/index.json --output=http://elasticsearch:9200/my_example_index --type=data"]
 
 volumes:
   es-data:
