@@ -53,6 +53,8 @@ services:
       - elastic
     depends_on:
       - elasticsearch
+      - kibana
+      - logstash
     command: ["bash", "-c", "elasticdump --input=/usr/src/app/index.json --output=http://elasticsearch:9200/my_example_index --type=data"]
 
 volumes:
