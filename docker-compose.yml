@@ -9,11 +9,14 @@ services:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - path.repo=/usr/share/elasticsearch/backup
     ulimits:
       memlock:
         soft: -1
         hard: -1
     volumes:
+      - ./elasticsearch.yml:/usr/shar/elasticsearch/config/elasticsearch.yml
+      - ./snapshots/:/usr/share/elasticsearch/snapshots/
       - es-data:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
@@ -42,21 +45,6 @@ services:
     networks:
       - elastic
   
-  elasticdump:
-    image: elasticdump/elasticsearch-dump 
-    container_name: elasticdump
-    ports:
-      - "5602:5602"
-    volumes: 
-      - ./elastic_dump_data/index.json:/usr/src/app/index.json
-    networks:
-      - elastic
-    depends_on:
-      - elasticsearch
-      - kibana
-      - logstash
-    command: ["bash", "-c", "elasticdump --input=/usr/src/app/index.json --output=http://elasticsearch:9200/my_example_index --type=data"]
-
 volumes:
   es-data:
     driver: local
