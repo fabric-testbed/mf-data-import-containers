@@ -1,1 +1,3 @@
-path.repo: ["/usr/share/elasticsearch/snapshots"] 
+network.host: localhost
+cluster.name: "es-docker-cluster"
+path.repo: ["/usr/share/elasticsearch/data"] 

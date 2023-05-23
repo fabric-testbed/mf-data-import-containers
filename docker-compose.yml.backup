@@ -9,14 +9,14 @@ services:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
-      - path.repo=/usr/share/elasticsearch/import_repository
+      - path.repo=/usr/share/elasticsearch/data
     ulimits:
       memlock:
         soft: -1
         hard: -1
     volumes:
-      - ./snapshots:/usr/share/elasticsearch/snapshots
-      - es-data:/usr/share/elasticsearch/data
+      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./snapshots:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
     networks:
@@ -34,10 +34,6 @@ services:
       - 5601:5601
     networks:
       - elastic
-
-volumes:
-  es-data:
-    driver: local
   
 networks:
   elastic:
