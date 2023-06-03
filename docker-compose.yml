@@ -15,6 +15,7 @@ services:
         soft: -1
         hard: -1
     volumes:
+      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./snapshots:/usr/share/elasticsearch/snapshots
       - es-data:/usr/share/elasticsearch/data
     ports:
