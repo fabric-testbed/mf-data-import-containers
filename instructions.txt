@@ -1,0 +1,53 @@
+# STEPS:
+
+1. start clean container
+
+
+2. register repo
+curl -X PUT -H "Content-Type: application/json" -d '{
+  "type": "fs",
+  "settings": {
+    "location": "/usr/share/elasticsearch/backup",
+    "compress": true
+  }
+}' http://localhost:9200/_snapshot/backup_repository
+
+
+3. register snapshot
+curl -X PUT -H "Content-Type: application/json" -d '{
+  "ignore_unavailable": true,
+  "include_global_state": false
+}' http://localhost:9200/_snapshot/backup_repository/snapshot_test
+
+4. stop container
+
+5. replace snapshot data with your own snapshot data (replace backup folder)
+
+6. delete all indices
+curl -X DELETE "http://localhost:9200/_all"
+
+7. restore snapshot
+curl -X POST "http://localhost:9200/_snapshot/backup_repository/snapshot_test/_restore?pretty" -H "Content-Type: application/json" -d '{
+  "indices": "metricbeat-7.13.2-2023.06.02-000001,.kibana_task_manager_7.13.0_001,.kibana_7.13.0_001,.ds-ilm-history-5-2023.06.02-000001,packetbeat-7.13.2-2023.06.02-000001,filebeat-7.13.2-2023.06.02-000001,.apm-custom-link,kibana_sample_data_flights,.apm-agent-configuration,.kibana-event-log-7.13.0-000001",
+  "index_settings": {
+    "index.number_of_replicas": 1
+  }
+}'
+
+
+
+
+# STEPS (With scripts):
+
+1. start clean container
+
+2. run ./register.sh
+
+3. stop container
+
+4. replace snapshot data with your own snapshot data (replace backup folder)
+	rm -rf backup
+	cp snapshots/_data backup
+
+5. run ./restore.sh
+

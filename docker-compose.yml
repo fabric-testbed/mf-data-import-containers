@@ -9,11 +9,14 @@ services:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - path.repo=/usr/share/elasticsearch/backup
     ulimits:
       memlock:
         soft: -1
         hard: -1
     volumes:
+      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./backup:/usr/share/elasticsearch/backup
       - es-data:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
@@ -26,26 +29,17 @@ services:
     environment:
       ELASTICSEARCH_URL: http://elasticsearch:9200
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
     ports:
       - 5601:5601
-    networks:
-      - elastic
-  
-  logstash:
-    image: docker.elastic.co/logstash/logstash:7.13.0
-    container_name: logstash
-    ports:
-      - "5044:5044"
-    volumes:
-      - ./logstash/conf.d/:/usr/share/logstash/pipeline/:ro
-      - ./es_indices/:/usr/share/logstash/es_indices/
     networks:
       - elastic
 
 volumes:
   es-data:
     driver: local
-
+  
 networks:
   elastic:
     driver: bridge
