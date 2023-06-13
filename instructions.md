@@ -25,7 +25,7 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 
 
 ### View repository after registration
-curl -X GET http://localhost:9200/_cat/snapshots/backup_repository?v
+curl -X GET "http://localhost:9200/_cat/snapshots/imported_repository?v"
 
 #### Delete all indices
 curl -X DELETE "http://localhost:9200/_all"
