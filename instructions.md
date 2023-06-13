@@ -30,13 +30,8 @@ curl -X GET "http://localhost:9200/_cat/snapshots/imported_repository?v"
 #### Delete all indices
 curl -X DELETE "http://localhost:9200/_all"
 
-#### Restore snapshot (replace snapshot name and index list)
-curl -X POST "http://localhost:9200/_snapshot/imported_repository/snapshot_test/_restore?pretty" -H "Content-Type: application/json" -d '{
-  "indices": "filebeat-7.13.2-2023.06.05-000001,.kibana_task_manager_7.13.0_001,.apm-agent-configuration,.apm-custom-link,.kibana-event-log-7.13.0-000001,metricbeat-7.13.2-2023.06.05-000001,packetbeat-7.13.2-2023.06.05-000001,.kibana_7.13.0_001",
-  "index_settings": {
-    "index.number_of_replicas": 1
-  }
-}'
+#### Restore snapshot (replace snapshot name and change index list if you want to customize)
+curl -X POST "http://localhost:9200/_snapshot/imported_repository/snapshot_test/_restore?pretty" -H "Content-Type: application/json" -d '{ "indices": "*", "index_settings": { "index.number_of_replicas": 1 } }'
 
 ### View indices
 curl -X GET "http://localhost:9200/_cat/indices?pretty"
