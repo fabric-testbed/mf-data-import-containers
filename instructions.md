@@ -23,6 +23,10 @@ curl -X PUT -H "Content-Type: application/json" -d '{
   }
 }' http://localhost:9200/_snapshot/imported_repository
 
+
+### View repository after registration
+curl -X GET http://localhost:9200/_cat/snapshots/backup_repository?v
+
 #### Delete all indices
 curl -X DELETE "http://localhost:9200/_all"
 
@@ -34,6 +38,9 @@ curl -X POST "http://localhost:9200/_snapshot/imported_repository/snapshot_test/
   }
 }'
 
+### View indices
+curl -X GET "http://localhost:9200/_cat/indices?pretty"
+
 ## Take down and reset container to original state:
 
 docker-compose down
@@ -41,4 +48,4 @@ docker-compose down
 docker volume rm elk-docker-container_es-data
 
 #### If you want to use a new backup
-rm -rf backup/* 
+rm -rf imported_data/* 
