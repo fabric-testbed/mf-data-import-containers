@@ -1,34 +1,30 @@
-# STEPS:
+### Instructions to import snapshot into new docker container:
 
-1. start clean container
+git clone https://github.com/jackhancockuky/elk-docker-container.git
 
+cd elk-docker-container
 
-2. register repo
+mkdir imported_data
+
+tar -xvf snapshots/elk_backup_2.tar -C imported_data # Where "elk_backup_2.tar" is your snapshot file name
+
+docker-compose up
+
+# Register the repository
 curl -X PUT -H "Content-Type: application/json" -d '{
   "type": "fs",
   "settings": {
-    "location": "/usr/share/elasticsearch/backup",
+    "location": "/usr/share/elasticsearch/imported_data/_data",
     "compress": true
   }
-}' http://localhost:9200/_snapshot/backup_repository
+}' http://localhost:9200/_snapshot/imported_repository
 
-
-3. register snapshot
-curl -X PUT -H "Content-Type: application/json" -d '{
-  "ignore_unavailable": true,
-  "include_global_state": false
-}' http://localhost:9200/_snapshot/backup_repository/snapshot_test
-
-4. stop container
-
-5. replace snapshot data with your own snapshot data (replace backup folder)
-
-6. delete all indices
+# Delete all indices
 curl -X DELETE "http://localhost:9200/_all"
 
-7. restore snapshot
-curl -X POST "http://localhost:9200/_snapshot/backup_repository/snapshot_test/_restore?pretty" -H "Content-Type: application/json" -d '{
-  "indices": "metricbeat-7.13.2-2023.06.02-000001,.kibana_task_manager_7.13.0_001,.kibana_7.13.0_001,.ds-ilm-history-5-2023.06.02-000001,packetbeat-7.13.2-2023.06.02-000001,filebeat-7.13.2-2023.06.02-000001,.apm-custom-link,kibana_sample_data_flights,.apm-agent-configuration,.kibana-event-log-7.13.0-000001",
+# Restore snapshot (replace snapshot name and index list)
+curl -X POST "http://localhost:9200/_snapshot/imported_repository/snapshot_test/_restore?pretty" -H "Content-Type: application/json" -d '{
+  "indices": "filebeat-7.13.2-2023.06.05-000001,.kibana_task_manager_7.13.0_001,.apm-agent-configuration,.apm-custom-link,.kibana-event-log-7.13.0-000001,metricbeat-7.13.2-2023.06.05-000001,packetbeat-7.13.2-2023.06.05-000001,.kibana_7.13.0_001",
   "index_settings": {
     "index.number_of_replicas": 1
   }
@@ -37,17 +33,13 @@ curl -X POST "http://localhost:9200/_snapshot/backup_repository/snapshot_test/_r
 
 
 
-# STEPS (With scripts):
 
-1. start clean container
 
-2. run ./register.sh
 
-3. stop container
+Take down and reset container to original state:
 
-4. replace snapshot data with your own snapshot data (replace backup folder)
-	rm -rf backup
-	cp snapshots/_data backup
+docker-compose down
+docker volume rm elk-docker-container_es-data
 
-5. run ./restore.sh
-
+# If you want to use a new backup
+rm -rf backup/* 
