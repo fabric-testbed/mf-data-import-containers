@@ -1,5 +1,9 @@
 # Instructions
 
+## Prerequisites
+- Docker is installed
+- Docker-compose is installed
+
 ## Create docker container and import your data
 
 git clone https://github.com/jackhancockuky/elk-docker-container.git
