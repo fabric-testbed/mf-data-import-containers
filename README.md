@@ -1,4 +1,10 @@
-# Measurement Framework Data Import Service
+# Measurement Framework Data Import Containers
+
+## How to use this Git Repository
+
+This repository is split into 2 parts. The ELK and Prometheus/Grafana docker-compose apps. 
+
+## Measurement Framework Data Import / Export service overview
 
 MFLib uses Prometheus and ELK to gather metrics and logs. It then uses Grafana and Kibana to visualize the gathered metrics and logs.
 
@@ -10,6 +16,8 @@ However, there are a few different circumstances where you may want to transfer 
 - You are no longer using your slice. You would like to delete it but save your data for later.
 - You want a backup of your data to ensure that it is safe even if something on the slice goes wrong.
 
-This is what the MFLib Data Transfer service helps you accomplish. The notebooks below help you export your Prometheus or ELK data via snapshots. These snapshots will be exported onto this JH server inside of a tar file. From there you can then move your snapshots anywhere and choose from any of the import options below to use/view your data again.
+
 
 # Diagram of Data Transfer Service
+
+![data_transfer_diagram drawio](https://github.com/jackhancockuky/data-import-containers/assets/100973595/e500322b-5932-4d6a-a519-0be92ac58ad3)
