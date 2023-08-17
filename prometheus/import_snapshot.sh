@@ -1,19 +1,17 @@
 #!/bin/bash
 
-
-backup_dir="./backup_snapshots"
 snapshot_dir="./snapshots"
 
 if [ $# -eq 0 ]
   then
     echo "Please enter the name of your snapshot tar file (inside backup_snapshots directory)"
-    read snapshot_tar_name
+    read snapshot_tar_path
   else
-    snapshot_tar_name=$1
+    snapshot_tar_path=$1
 fi
 
 mkdir temp_snapshot
-tar -xvf "$backup_dir/$snapshot_tar_name" -C temp_snapshot/
+tar -xvf "$snapshot_tar_path" -C temp_snapshot/
 
 # Loop through each directory within the temp snapshot folder
 for dir in "./temp_snapshot"/*; do
@@ -29,5 +27,5 @@ done
 
 rm -rf temp_snapshot
 
-echo "Successfully copied all snapshot data from $snapshot_tar_name into shared directory ($snapshot_dir)"
+echo "Successfully copied all snapshot data from $snapshot_tar_path into shared directory ($snapshot_dir)"
 
