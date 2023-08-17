@@ -23,9 +23,9 @@ git clone https://github.com/jackhancockuky/prometheus-grafana-docker-container
 
 #### 2.2 Run the import_snapshot.sh script to load snapshot data into shared directory.
 ```bash
-./import_snapshot.sh
+./import_snapshot.sh {snapshot_tar_path}
 ```
-Enter snapshot tar file name in script
+Enter snapshot tar file path as paramater or when the script asks you for it
 
 #### 2.2 Start the docker-compose app
 ##### The first run may take some time due to downloading the required docker images.
