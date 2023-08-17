@@ -13,14 +13,14 @@
 
 #### 1.2 Clone this Git Repository
 ```bash
-git clone https://github.com/jackhancockuky/elk-docker-container.git
+git clone https://github.com/jackhancockuky/data-import-containers.git
 ```
 
 
 ## 2. Create docker container and get your snapshot data ready
 #### 2.1 Move to git repo and create directory for snapshot data
 ```bash
-cd elk-docker-container
+cd data-import-containers/elk
 mkdir imported_data
 ```
 
