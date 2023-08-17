@@ -13,7 +13,7 @@
 
 #### 1.2 Clone this Git Repository
 ```bash
-git clone https://github.com/jackhancockuky/prometheus-grafana-docker-container
+git clone https://github.com/jackhancockuky/data-import-containers.git
 ```
 
 
