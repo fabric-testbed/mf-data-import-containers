@@ -11,7 +11,7 @@ Instructions for ELK:
 https://github.com/jackhancockuky/data-import-containers/blob/main/elk/README.md
 
 Instructions for Prometheus/Grafana: 
-https://github.com/jackhancockuky/data-import-containers/blob/main/README.md
+[https://github.com/jackhancockuky/data-import-containers/blob/main/README.md](https://github.com/jackhancockuky/data-import-containers/blob/main/prometheus/README.md)
 
 ## Overview of the Measurement Framework Data Export/Import service
 
