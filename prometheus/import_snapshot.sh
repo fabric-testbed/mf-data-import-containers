@@ -4,7 +4,7 @@ snapshot_dir="./snapshots"
 
 if [ $# -eq 0 ]
   then
-    echo "Please enter the name of your snapshot tar file (inside backup_snapshots directory)"
+    echo "Please enter the path of your snapshot tar file"
     read snapshot_tar_path
   else
     snapshot_tar_path=$1
