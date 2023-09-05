@@ -1,6 +1,8 @@
+version: "3.3"
 services:
   prometheus:
     image: prom/prometheus
+    user: root
     container_name: prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -25,3 +27,4 @@ services:
       - ./grafana:/etc/grafana/provisioning/datasources
 volumes:
   prom_data:
+    driver: local
