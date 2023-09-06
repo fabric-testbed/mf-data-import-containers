@@ -1,13 +1,18 @@
 #!/bin/bash
 
-snapshot_dir="./snapshots"
-
 if [ $# -eq 0 ]
   then
     echo "Please enter the path of your snapshot tar file"
     read snapshot_tar_path
+    snapshot_dir="./snapshots"
   else
     snapshot_tar_path=$1
+    if [ $# -eq 1 ]
+      then
+        snapshot_dir="./snapshots"
+      else
+        snapshot_dir=$2
+    fi
 fi
 
 mkdir temp_snapshot
