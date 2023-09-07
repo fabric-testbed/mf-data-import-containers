@@ -3,7 +3,7 @@
 ## How to use this Git Repository
 
 Before using this repository, make sure you have snapshot data from Elastic Search or Prometheus. All information for doing so can be found in these notebooks:
-https://github.com/jackhancockuky/jupyter-examples/blob/mf_data_transfer/fabric_examples/mflib/data_transfer_service/start_here.ipynb
+https://github.com/fabric-testbed/jupyter-examples/tree/mf_data_transfer/fabric_examples/mflib/data_transfer_service
 
 The goal of this repository is to allow Fabric users to easily import their snapshot data into a new ELK / Prometheus setup. This repository is split into 2 parts. The ELK and Prometheus/Grafana docker-compose apps. 
 
@@ -11,7 +11,7 @@ Instructions for ELK:
 https://github.com/jackhancockuky/data-import-containers/blob/main/elk/README.md
 
 Instructions for Prometheus/Grafana: 
-[https://github.com/jackhancockuky/data-import-containers/blob/main/README.md](https://github.com/jackhancockuky/data-import-containers/blob/main/prometheus/README.md)
+https://github.com/fabric-testbed/mf-data-import-containers/blob/main/prometheus/README.md
 
 ## Overview of the Measurement Framework Data Export/Import service
 
